@@ -16,7 +16,6 @@ public class RqObject extends RxObject {
     public RqObject(String rqName) {
         super(rqName);
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        this.requestSpecification = RestAssured.given().auth().oauth2("8d3edc50fd5dbb75c78aa0e6b003827314f21f4aa8f03facd79465e78ef22e66");
         this.requestSpecification = RestAssured.given().auth().oauth2("8d3edc50fd5dbb75c78aa0e6b003827314f21f4aa8f03facd79465c96ce44c55");
     }
 
