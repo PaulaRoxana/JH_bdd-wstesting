@@ -24,19 +24,19 @@ public class StepDefinitions {
         rxStore.putDataIntoStore(getRequestObject.getRxName(), getRequestObject);
     }
 
-    @When("^user sends \"([^\"]*)\" \"([^\"]*)\" request$")
-    public void userSendsRequest(String requestMethod, String rqName) {
-        RqObject requestObject = (RqObject) rxStore.getDataFromStore(rqName);
-        String rsName = rqName.replace("RQ", "RS");
-        RsObject receivedResponse = switch (requestMethod) {
-            case "GET" -> new GetResponseObject(rsName, requestObject.sendGetRequest());
-            case "POST" -> new PostResponseObject(rsName, requestObject.sendPostRequest());
-            case "DELETE" -> new DeleteResponseObject(rsName, requestObject.sendDeleteRequest());
-            default -> throw new IllegalStateException("Unexpected value: " + requestMethod);
-        };
-
-        rxStore.putDataIntoStore(receivedResponse.getRxName(), receivedResponse);
-    }
+//    @When("^user sends \"([^\"]*)\" \"([^\"]*)\" request$")
+//    public void userSendsRequest(String requestMethod, String rqName) {
+//        RqObject requestObject = (RqObject) rxStore.getDataFromStore(rqName);
+//        String rsName = rqName.replace("RQ", "RS");
+//        RsObject receivedResponse = switch (requestMethod) {
+//            case "GET" -> new GetResponseObject(rsName, requestObject.sendGetRequest());
+//            case "POST" -> new PostResponseObject(rsName, requestObject.sendPostRequest());
+//            case "DELETE" -> new DeleteResponseObject(rsName, requestObject.sendDeleteRequest());
+//            default -> throw new IllegalStateException("Unexpected value: " + requestMethod);
+//        };
+//
+//        rxStore.putDataIntoStore(receivedResponse.getRxName(), receivedResponse);
+//    }
 
     @Then("^\"([^\"]*)\" code is \"([^\"]*)\"$")
     public void responseStatusCodeEqualsExpected(String rsName, String statusCode) {
@@ -94,5 +94,9 @@ public class StepDefinitions {
         deleteRequestObject.createRequestForDeletingUser(userId);
 
         rxStore.putDataIntoStore(deleteRequestObject.getRxName(), deleteRequestObject);
+    }
+
+    @When("user sends {string} {string} request")
+    public void userSendsRequest(String arg0, String arg1) {
     }
 }
